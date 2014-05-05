@@ -33,15 +33,32 @@ public class Board
 
         dogMatches = new ArrayList<DogCell>((size * size) / 2);
 
-        // Creates all pairs of dogs and stores them in a list.
+        dogPairList();
+        placePairRandom();
+    }
+
+
+    // ----------------------------------------------------------
+    /**
+     * Creates all pairs of dogs and stores them in a list.
+     */
+    public void dogPairList()
+    {
         for (int i = 0; i < (size * size) / 2; i++)
         {
             DogCell dog = new DogCell();
             dog.setMatch(new DogCell());
             dogMatches.add(dog);
         }
+    }
 
-        // Places each pair into a random places in cardBoard.
+
+    // ----------------------------------------------------------
+    /**
+     * Places each pair into a random places in cardBoard.
+     */
+    public void placePairRandom()
+    {
         for (DogCell dogPic : dogMatches)
         {
             int xCell;
@@ -69,7 +86,6 @@ public class Board
             dogPic.getMatch().setX(xCell);
             dogPic.getMatch().setY(yCell);
         }
-
     }
 
 
