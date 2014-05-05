@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 /**
  * // -------------------------------------------------------------------------
- * /** Class creates the grid that stores the images.
+ * /** Class creates an empty grid for images to be placed. Model class.
  *
  * @author lv23, katee93
  * @version 2014.04.16
@@ -29,8 +29,10 @@ public class Board
     {
         this.size = size;
 
+        // Array to create grid
         cardBoard = new DogCell[size][size];
 
+        // List with the N indexes to hold a pair of different pics
         dogMatches = new ArrayList<DogCell>((size * size) / 2);
 
         dogPairList();
@@ -40,7 +42,8 @@ public class Board
 
     // ----------------------------------------------------------
     /**
-     * Creates 2 pair objects and gets stored in the list.
+     * Two DogCell objects are paired together and gets stored in the list. This
+     * pair will hold the same dog picture.
      */
     public void dogPairList()
     {
@@ -77,13 +80,12 @@ public class Board
             dogPic.setX(xCell);
             dogPic.setY(yCell);
 
-            //The pair dog pic same implementation
+            // The pair dog pic same implementation
             do
             {
                 xCell = Random.generator().nextInt(size);
                 yCell = Random.generator().nextInt(size);
             }
-
 
             while (cardBoard[xCell][yCell] != null);
 
@@ -96,7 +98,7 @@ public class Board
 
     // ----------------------------------------------------------
     /**
-     * Returns the cell given.
+     * Returns the chosen cell
      *
      * @param x
      * @param y
@@ -110,6 +112,9 @@ public class Board
 
     // ----------------------------------------------------------
     /**
+     * Method to check if all pairs have been matched by changing the list is
+     * empty.
+     *
      * @return true if all matches are found.
      */
     public boolean isFinished()
@@ -124,7 +129,7 @@ public class Board
      *
      * @return list of matches
      */
-    public List<DogCell> unFoundMatches()
+    public List<DogCell> listOfPairPics()
     {
         return dogMatches;
     }

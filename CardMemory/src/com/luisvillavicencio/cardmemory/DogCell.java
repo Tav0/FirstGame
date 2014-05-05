@@ -81,11 +81,11 @@ public class DogCell
     /**
      * Setter for y-coordinate
      *
-     * @param y coordinate
+     * @param y
+     *            coordinate
      */
     public void setY(int y)
     {
         this.y = y;
     }
-
 }

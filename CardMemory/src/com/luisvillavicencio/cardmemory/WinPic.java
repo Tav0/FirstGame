@@ -29,5 +29,4 @@ public class WinPic
         super(left, top, right, bottom);
         setImage("win");
     }
-
 }
