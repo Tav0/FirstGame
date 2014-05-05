@@ -1,7 +1,6 @@
 package com.luisvillavicencio.cardmemory;
 
-import android.graphics.Point;
-import java.util.Collections;
+import sofia.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -15,9 +14,9 @@ import java.util.ArrayList;
 public class Board
 {
     // Fields
-    private DogCell[][] cardBoard;
-    private int         size;
-    private List<Point> allPositionPoints;
+    private DogCell[][]   cardBoard;
+    private int           size;
+    private List<DogCell> dogMatches;
 
 
     // Constructor
@@ -32,89 +31,81 @@ public class Board
 
         cardBoard = new DogCell[size][size];
 
-        allPositionPoints = new ArrayList<Point>(size * size);
+        dogMatches = new ArrayList<DogCell>((size * size) / 2);
 
-        listOfPositions();
-        setDogPic();
-    }
-
-
-    // ----------------------------------------------------------
-    /**
-     * Creates list of positions and shuffles them.
-     */
-    public void listOfPositions()
-    {
-        for (int i = 0; i < size; i++)
+        // Creates all pairs of dogs and stores them in a list.
+        for (int i = 0; i < (size * size) / 2; i++)
         {
-            for (int j = 0; j < size; j++)
-            {
-                allPositionPoints.add(new Point(i, j));
-            }
+            DogCell dog = new DogCell();
+            dog.setMatch(new DogCell());
+            dogMatches.add(dog);
         }
-        Collections.shuffle(allPositionPoints);
-    }
 
-
-    // ----------------------------------------------------------
-    /**
-     * Gets points from arrayList and places the ENUMS randomly in the list.
-     */
-    public void setDogPic()
-    {
-        int i = 0;
-        for (DogCell dogCell : DogCell.values())
+        // Places each pair into a random places in cardBoard.
+        for (DogCell dogPic : dogMatches)
         {
-            if (i < 5)
-            {
-                int card1x = allPositionPoints.get(i).x;
-                int card1y = allPositionPoints.get(i).y;
-                this.cardBoard[card1x][card1y] = dogCell;
+            int xCell;
+            int yCell;
 
-                int card2x = allPositionPoints.get(++i).x;
-                int card2y = allPositionPoints.get(++i).y;
-                this.cardBoard[card2x][card2y] = dogCell;
+            do
+            {
+                xCell = Random.generator().nextInt(size);
+                yCell = Random.generator().nextInt(size);
             }
-            ++i;
+            while (cardBoard[xCell][yCell] != null);
+
+            cardBoard[xCell][yCell] = dogPic;
+            dogPic.setX(xCell);
+            dogPic.setY(yCell);
+
+            do
+            {
+                xCell = Random.generator().nextInt(size);
+                yCell = Random.generator().nextInt(size);
+            }
+            while (cardBoard[xCell][yCell] != null);
+
+            cardBoard[xCell][yCell] = dogPic.getMatch();
+            dogPic.getMatch().setX(xCell);
+            dogPic.getMatch().setY(yCell);
         }
+
     }
 
 
     // ----------------------------------------------------------
     /**
-     * Place a description of your method here.
+     * Gets a cell and its match in the board.
      *
-     * @return DogCell
+     * @param x
+     * @param y
+     * @return the cell picked
      */
-    public DogCell getPic()
+    public DogCell getDogCell(int x, int y)
     {
-        for (int i = 0; i < size; i++)
-        {
-            for (int j = 0; j < size; j++)
-            {
-                if (cardBoard[i][j] == DogCell.DOGPIC1)
-                {
-                    return DogCell.DOGPIC1;
-                }
-                else if (cardBoard[i][j] == DogCell.DOGPIC2)
-                {
-                    return DogCell.DOGPIC2;
-                }
-                else if (cardBoard[i][j] == DogCell.DOGPIC3)
-                {
-                    return DogCell.DOGPIC3;
-                }
-                else if (cardBoard[i][j] == DogCell.DOGPIC4)
-                {
-                    return DogCell.DOGPIC4;
-                }
-                else if (cardBoard[i][j] == DogCell.DOCPIC5)
-                {
-                    return DogCell.DOCPIC5;
-                }
-            }
-        }
-        return null;
+        return cardBoard[x][y];
+    }
+
+
+    // ----------------------------------------------------------
+    /**
+     * @return true if all matches are found.
+     */
+    public boolean isFinished()
+    {
+        return dogMatches.isEmpty();
+    }
+
+
+    // ----------------------------------------------------------
+    /**
+     * Getter method to get the list.
+     *
+     * @return list of matches
+     */
+    public List<DogCell> unFoundMatches()
+    {
+        return dogMatches;
     }
 
 

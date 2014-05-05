@@ -6,10 +6,13 @@ int drawable dog3 0x7f020002
 int drawable dog4 0x7f020003
 int drawable dog5 0x7f020004
 int drawable dog6 0x7f020005
-int drawable ic_launcher 0x7f020006
-int id action_settings 0x7f080002
+int drawable dog7 0x7f020006
+int drawable dog8 0x7f020007
+int drawable ic_launcher 0x7f020008
+int id action_settings 0x7f080003
 int id resetButton 0x7f080001
-int id shapeView 0x7f080000
+int id shapeView 0x7f080002
+int id textView1 0x7f080000
 int layout card 0x7f030000
 int menu card_game 0x7f070000
 int string action_settings 0x7f040001

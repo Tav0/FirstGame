@@ -1,36 +1,91 @@
 package com.luisvillavicencio.cardmemory;
+
+// -------------------------------------------------------------------------
 /**
- * // -------------------------------------------------------------------------
- * /** Enum class with the 6 picture names. Used for back-end to place in the
- * cells and use it to easily check the type of picture.
+ * Class that pairs two dog pictures.
  *
  * @author lv23, katee93
  * @version 2014.04.30
  */
-public enum DogCell
+public class DogCell
 {
+    // Fields
+    private DogCell match;
+    private int     x;
+    private int     y;
+
+
+    // ----------------------------------------------------------
     /**
+     * Method returns the dogs match.
      *
+     * @return pic's match.
      */
-    DOGPIC1,
+    public DogCell getMatch()
+    {
+        return match;
+    }
+
+
+    // ----------------------------------------------------------
     /**
+     * Method sets two DogCells equal to each other.
      *
+     * @param match
+     *            dogCell match
      */
-    DOGPIC2,
+    public void setMatch(DogCell match)
+    {
+        this.match = match;
+        match.match = this;
+    }
+
+
+    // ----------------------------------------------------------
     /**
+     * Place a description of your method here.
      *
+     * @return x coordinate
      */
-    DOGPIC3,
+    public int getX()
+    {
+        return x;
+    }
+
+
+    // ----------------------------------------------------------
     /**
+     * Place a description of your method here.
      *
+     * @param x
      */
-    DOGPIC4,
+    public void setX(int x)
+    {
+        this.x = x;
+    }
+
+
+    // ----------------------------------------------------------
     /**
+     * Place a description of your method here.
      *
+     * @return y coordinate
      */
-    DOCPIC5;
+    public int getY()
+    {
+        return y;
+    }
+
+
+    // ----------------------------------------------------------
     /**
+     * Place a description of your method here.
      *
+     * @param y coord
      */
-    //DOGPIC6;
+    public void setY(int y)
+    {
+        this.y = y;
+    }
+
 }

@@ -1,7 +1,8 @@
 package com.luisvillavicencio.cardmemory;
 
-// import sofia.graphics.RectangleShape;
-// import sofia.graphics.RectangleShape;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import sofia.app.ShapeScreen;
 
 /**
@@ -17,51 +18,72 @@ public class CardGame
 
 {
     // Fields
-    // private DogPic[][] dogPic;
-    // private CoverTile[][] tileScreen;
-    // private Board board;
 
+    private Board            board;
+    private DogCell          firstTouch;
+    private Button           reset;
     private int              pxSize;
     private int              cellSize;
 
     private static final int GAMESIZE = 4;
+    private List<String>     picName;
+    private String[]         pics     = { "dog1", "dog2", "dog3", "dog4",
+        "dog5", "dog6", "dog7", "dog8" };
 
 
     public void initialize()
     {
-        // board = new Board(GAMESIZE);
-        // dogPic = new DogPic[GAMESIZE][GAMESIZE];
-        // tileScreen = new CoverTile[GAMESIZE][GAMESIZE];
+        firstTouch = null;
+
+        picName = new ArrayList<String>();
+        for (String p : pics)
+        {
+            picName.add(p);
+        }
+
+        board = new Board(GAMESIZE);
+
         pxSize = Math.min((int)getWidth(), (int)getHeight());
         cellSize = pxSize / GAMESIZE;
 
-        // dogCard();
+        for (DogCell d : board.unFoundMatches())
+        {
+            String p = getUnusedPic();
+            placePicture(d, p);
+            placePicture(d.getMatch(), p);
+        }
+
         cover();
     }
 
 
+    // ----------------------------------------------------------
     /**
-     * Places the dog pictures to a 4x3 grid.
+     * Place a description of your method here.
+     *
+     * @param cell
+     * @param fileName
      */
-    /**public void dogCard()
+    public void placePicture(DogCell cell, String fileName)
     {
-        for (int row = 0; row < GAMESIZE; row++)
-        {
-            // float dogCellHeight = this.getHeight() / GAMESIZE;
-            for (int col = 0; col < GAMESIZE; col++)
-            {
-                // float dogCellWidth = this.getWidth() / this.height;
-                DogPic picDog =
-                    new DogPic(
-                        (row * cellSize),
-                        (col * cellSize),
-                        ((row + 1) * cellSize),
-                        ((col + 1) * cellSize),
-                        board.getPic());
-                add(dogPic);
-            }
-        }
-    }*/
+        float dogCellWidth = this.getWidth() / GAMESIZE;
+        float dogCellHeight = this.getHeight() / GAMESIZE;
+
+        DogPic picDog =
+            new DogPic(
+                (cell.getX() * dogCellWidth),
+                (cell.getY() * dogCellHeight),
+                ((cell.getX() + 1) * dogCellWidth),
+                ((cell.getY() + 1) * dogCellHeight),
+                fileName);
+        add(picDog);
+    }
+
+
+    private String getUnusedPic()
+    {
+        return picName.remove(0);
+    }
 
 
     /**
@@ -71,20 +93,27 @@ public class CardGame
     {
         for (int row = 0; row < GAMESIZE; row++)
         {
-            int tileWidth = (int)getWidth() / GAMESIZE;
             for (int col = 0; col < GAMESIZE; col++)
             {
-                int tileHeight = (int)getHeight() / GAMESIZE;
-                CoverTile tile =
-                    new CoverTile(
-                        (row * tileWidth),
-                        (col * tileHeight),
-                        ((row + 1) * tileWidth),
-                        (col + 1) * tileHeight);
-
+                CoverTile tile = createCover(row, col);
                 add(tile);
             }
         }
+    }
+
+
+    private CoverTile createCover(int row, int col)
+    {
+        int tileWidth = (int)getWidth() / GAMESIZE;
+        int tileHeight = (int)getHeight() / GAMESIZE;
+
+        CoverTile tile =
+            new CoverTile(
+                (row * tileWidth),
+                (col * tileHeight),
+                ((row + 1) * tileWidth),
+                (col + 1) * tileHeight);
+        return tile;
     }
 
 
@@ -94,7 +123,7 @@ public class CardGame
      * @param x
      * @param y
      */
-    public void reveal(float x, float y)
+    public void processTouch(float x, float y)
     {
         CoverTile tile =
             getShapes().locatedAt(x, y).withClass(CoverTile.class).front();
@@ -103,6 +132,83 @@ public class CardGame
             tile.animate(1000).rotation(360).alpha(0).removeWhenComplete()
                 .play();
         }
+
+        if (firstTouch == null)
+        {
+            firstTouch = board.getDogCell(getCellX(x), getCellY(y));
+        }
+        else
+        {
+            DogCell secondTouch = board.getDogCell(getCellX(x), getCellY(y));
+            if (secondTouch.equals(firstTouch.getMatch()))
+            {
+                if (board.unFoundMatches().contains(firstTouch))
+                {
+                    board.unFoundMatches().remove(firstTouch);
+                }
+                else
+                {
+                    board.unFoundMatches().remove(secondTouch);
+                }
+                // TODO check if game is finished
+                if (board.isFinished())
+                {
+                    // display textView "WON"
+                }
+            }
+            else
+            {
+                // add delay TO NOT RE-COVER THE TILES.
+                add(createCover(firstTouch.getX(), firstTouch.getY()));
+                add(createCover(secondTouch.getX(), secondTouch.getY()));
+            }
+            firstTouch = null;
+
+        }
+
+    }
+
+
+    private int getCellX(float x)
+    {
+        float dogCellWidth = this.getWidth() / GAMESIZE;
+
+        return (int)(x / dogCellWidth);
+    }
+
+
+    private int getCellY(float y)
+    {
+        float dogCellHeight = this.getHeight() / GAMESIZE;
+        return (int)(y / dogCellHeight);
+    }
+
+
+    /**
+     * Be able for the screen to be touched.
+     *
+     * @param x
+     *            width
+     * @param y
+     *            height
+     */
+    public void onTouchDown(float x, float y)
+    {
+        processTouch(x, y);
+    }
+
+
+    /**
+     * Be able for the screen to be touched.
+     *
+     * @param x
+     *            width
+     * @param y
+     *            height
+     */
+    public void onTouchMove(float x, float y)
+    {
+        // processTouch(x, y);
     }
 
 
@@ -112,6 +218,7 @@ public class CardGame
     public void resetClicked()
     {
         // reset button
+        initialize();
     }
 
 

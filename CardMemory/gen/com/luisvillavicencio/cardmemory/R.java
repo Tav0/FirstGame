@@ -27,12 +27,15 @@ public final class R {
         public static final int dog4=0x7f020003;
         public static final int dog5=0x7f020004;
         public static final int dog6=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
+        public static final int dog7=0x7f020006;
+        public static final int dog8=0x7f020007;
+        public static final int ic_launcher=0x7f020008;
     }
     public static final class id {
-        public static final int action_settings=0x7f080002;
+        public static final int action_settings=0x7f080003;
         public static final int resetButton=0x7f080001;
-        public static final int shapeView=0x7f080000;
+        public static final int shapeView=0x7f080002;
+        public static final int textView1=0x7f080000;
     }
     public static final class layout {
         public static final int card=0x7f030000;

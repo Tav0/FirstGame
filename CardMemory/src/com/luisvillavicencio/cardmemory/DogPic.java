@@ -20,46 +20,12 @@ public class DogPic
      * @param top
      * @param right
      * @param bottom
-     * @param dogPic
+     * @param fileName
      */
     public DogPic(float left, float top, float right,
-        float bottom, DogCell dogPic)
+        float bottom, String fileName)
     {
         super(left, top, right, bottom);
-        setDogPic(dogPic);
-    }
-
-    // ----------------------------------------------------------
-    /**
-     * Sets the picture of different dogs depending on which
-     * is passed down.
-     * @param dogPic
-     */
-    public void setDogPic(DogCell dogPic)
-    {
-        if (dogPic == DogCell.DOGPIC1)
-        {
-            setImage("dogpic1");
-        }
-        else if (dogPic == DogCell.DOGPIC2)
-        {
-            setImage("dogpic2");
-        }
-        else if (dogPic == DogCell.DOGPIC3)
-        {
-            setImage("dogpic3");
-        }
-        else if (dogPic == DogCell.DOGPIC4)
-        {
-            setImage("dogpic4");
-        }
-        else if (dogPic == DogCell.DOCPIC5)
-        {
-            setImage("dogpic5");
-        }
-        else
-        {
-            setImage("dogpic6");
-        }
+        setImage(fileName);
     }
 }
