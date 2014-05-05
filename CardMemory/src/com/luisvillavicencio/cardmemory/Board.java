@@ -40,7 +40,7 @@ public class Board
 
     // ----------------------------------------------------------
     /**
-     * Creates all pairs of dogs and stores them in a list.
+     * Creates 2 pair objects and gets stored in the list.
      */
     public void dogPairList()
     {
@@ -64,22 +64,27 @@ public class Board
             int xCell;
             int yCell;
 
+            // Places first pic of a pair of dog pics in the array.
             do
             {
                 xCell = Random.generator().nextInt(size);
                 yCell = Random.generator().nextInt(size);
-            }
+            }// If cell has a pic in it already, other numbers will be
+             // generated to find an empty cell to place pic.
             while (cardBoard[xCell][yCell] != null);
 
             cardBoard[xCell][yCell] = dogPic;
             dogPic.setX(xCell);
             dogPic.setY(yCell);
 
+            //The pair dog pic same implementation
             do
             {
                 xCell = Random.generator().nextInt(size);
                 yCell = Random.generator().nextInt(size);
             }
+
+
             while (cardBoard[xCell][yCell] != null);
 
             cardBoard[xCell][yCell] = dogPic.getMatch();
@@ -91,7 +96,7 @@ public class Board
 
     // ----------------------------------------------------------
     /**
-     * Gets a cell and its match in the board.
+     * Returns the cell given.
      *
      * @param x
      * @param y

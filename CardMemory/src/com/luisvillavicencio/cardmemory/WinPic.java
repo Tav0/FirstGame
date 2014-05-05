@@ -4,18 +4,16 @@ import sofia.graphics.RectangleShape;
 
 // -------------------------------------------------------------------------
 /**
- *  Write a one-sentence summary of your class here.
- *  Follow it with additional details about its purpose, what abstraction
- *  it represents, and how to use it.
+ * Class is for the win pic
  *
- *  @author Tavo
- *  @version May 5, 2014
+ * @author lv23, katee93
+ * @version May 5, 2014
  */
 public class WinPic
     extends RectangleShape
 {
     /**
-     * Creates a red tile.
+     * Creates the win pic.
      *
      * @param left
      *            screen

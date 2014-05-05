@@ -1,6 +1,5 @@
 package com.luisvillavicencio.cardmemory;
 
-import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 import sofia.app.ShapeScreen;
@@ -40,6 +39,23 @@ public class CardScreen
         }
 
         board = new Board(GAMESIZE);
+
+        IntroPic intro =
+            new IntroPic(
+                (0 * this.getWidth()),
+                (0 * this.getHeight()),
+                (int)this.getWidth(),
+                (int)this.getHeight());
+        add(intro);
+
+        try
+        {
+            Thread.sleep(6000);
+        }
+        catch (InterruptedException ex)
+        {
+            Thread.currentThread().interrupt();
+        }
 
         for (DogCell d : board.unFoundMatches())
         {
@@ -205,7 +221,9 @@ public class CardScreen
         return (int)(x / dogCellWidth);
     }
 
-
+    /**
+     * Getter method for
+     */
     private int getCellY(float y)
     {
         float dogCellHeight = this.getHeight() / GAMESIZE;
@@ -234,5 +252,17 @@ public class CardScreen
     {
         // reset button
         initialize();
+    }
+
+
+    // ----------------------------------------------------------
+    /**
+     * Getters method to get the board.
+     *
+     * @return Board class.
+     */
+    public Board getBoard()
+    {
+        return board;
     }
 }

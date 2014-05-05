@@ -1,29 +1,43 @@
 package com.luisvillavicencio.cardmemory;
 
-import sofia.util.Random;
 import student.TestCase;
+
 // -------------------------------------------------------------------------
 /**
- *  Write a one-sentence summary of your class here.
- *  Follow it with additional details about its purpose, what abstraction
- *  it represents, and how to use it.
+ * Write a one-sentence summary of your class here. Follow it with additional
+ * details about its purpose, what abstraction it represents, and how to use it.
  *
- *  @author lv23, katee93
- *  @version 2014.05.04
+ * @author lv23, katee93
+ * @version 2014.05.04
  */
 public class BoardTest
     extends TestCase
 {
-    //Fields
+    // Fields
     private Board board;
+    private DogCell dogCell;
 
-    //Setup
+
+    // Setup
     public void setUp()
     {
-        board = new Board(2);
+        //
     }
 
 
+    // ----------------------------------------------------------
+    /**
+     * Place a description of your method here.
+     */
+    public void test1()
+    {
+        board = new Board(2);
 
+        assertEquals(2, board.unFoundMatches().size());
 
+        board.unFoundMatches().remove(0);
+        board.unFoundMatches().remove(0);
+        assertTrue(board.isFinished());
+
+    }
 }

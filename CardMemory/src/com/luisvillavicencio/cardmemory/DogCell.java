@@ -43,7 +43,7 @@ public class DogCell
 
     // ----------------------------------------------------------
     /**
-     * Place a description of your method here.
+     * Getter to get the x-coordinate
      *
      * @return x coordinate
      */
@@ -55,7 +55,7 @@ public class DogCell
 
     // ----------------------------------------------------------
     /**
-     * Place a description of your method here.
+     * Setter for x-coordinate
      *
      * @param x
      */
@@ -67,7 +67,7 @@ public class DogCell
 
     // ----------------------------------------------------------
     /**
-     * Place a description of your method here.
+     * Getter to get the y-coordinate
      *
      * @return y coordinate
      */
@@ -79,9 +79,9 @@ public class DogCell
 
     // ----------------------------------------------------------
     /**
-     * Place a description of your method here.
+     * Setter for y-coordinate
      *
-     * @param y coord
+     * @param y coordinate
      */
     public void setY(int y)
     {

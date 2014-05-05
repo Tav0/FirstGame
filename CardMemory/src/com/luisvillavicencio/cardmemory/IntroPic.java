@@ -4,16 +4,16 @@ import sofia.graphics.RectangleShape;
 
 // -------------------------------------------------------------------------
 /**
- * Class for the lose pic.
+ * Class for intro pic
  *
  * @author lv23, katee93
- * @version May 5, 2014
+ * @version 2014.05.02
  */
-public class LostPic
+public class IntroPic
     extends RectangleShape
 {
     /**
-     * Creates the losing pic.
+     * Creates the intro pic
      *
      * @param left
      *            screen
@@ -24,9 +24,9 @@ public class LostPic
      * @param bottom
      *            screen
      */
-    public LostPic(float left, float top, float right, float bottom)
+    public IntroPic(float left, float top, float right, float bottom)
     {
         super(left, top, right, bottom);
-        setImage("lost");
+        setImage("intro");
     }
 }
