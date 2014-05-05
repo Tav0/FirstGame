@@ -9,18 +9,17 @@
     tools:context=".CardGame" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/infoLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/resetButton"
-        android:layout_alignBottom="@+id/resetButton"
+        android:layout_alignBaseline="@+id/reset"
+        android:layout_alignBottom="@+id/reset"
         android:layout_alignRight="@+id/shapeView"
         android:layout_marginLeft="62dp"
-        android:layout_toRightOf="@+id/resetButton"
-        android:text="TextView" />
+        android:layout_toRightOf="@+id/reset" />
 
     <Button
-        android:id="@+id/resetButton"
+        android:id="@+id/reset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/shapeView"
@@ -29,10 +28,10 @@
 
     <sofia.graphics.ShapeView
         android:id="@+id/shapeView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
         android:layout_alignParentBottom="true"
-        android:layout_below="@+id/resetButton"
+        android:layout_below="@+id/reset"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

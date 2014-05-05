@@ -1,5 +1,6 @@
 package com.luisvillavicencio.cardmemory;
 
+import sofia.util.Random;
 import student.TestCase;
 // -------------------------------------------------------------------------
 /**
@@ -21,6 +22,8 @@ public class BoardTest
     {
         board = new Board(2);
     }
+
+
 
 
 

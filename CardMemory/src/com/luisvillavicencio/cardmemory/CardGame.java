@@ -1,7 +1,7 @@
 package com.luisvillavicencio.cardmemory;
 
+import android.widget.TextView;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import sofia.app.ShapeScreen;
 
@@ -21,9 +21,7 @@ public class CardGame
 
     private Board            board;
     private DogCell          firstTouch;
-    private Button           reset;
-    private int              pxSize;
-    private int              cellSize;
+    private TextView         infoLabel;
 
     private static final int GAMESIZE = 4;
     private List<String>     picName;
@@ -43,14 +41,17 @@ public class CardGame
 
         board = new Board(GAMESIZE);
 
-        pxSize = Math.min((int)getWidth(), (int)getHeight());
-        cellSize = pxSize / GAMESIZE;
-
         for (DogCell d : board.unFoundMatches())
         {
             String p = getUnusedPic();
             placePicture(d, p);
             placePicture(d.getMatch(), p);
+        }
+
+        try {
+            Thread.sleep(3000);
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
         }
 
         cover();
@@ -153,12 +154,19 @@ public class CardGame
                 // TODO check if game is finished
                 if (board.isFinished())
                 {
+                    infoLabel.setText("You WON!");
                     // display textView "WON"
                 }
             }
             else
             {
                 // add delay TO NOT RE-COVER THE TILES.
+                try {
+                    Thread.sleep(1000);
+                } catch(InterruptedException ex) {
+                    Thread.currentThread().interrupt();
+                }
+
                 add(createCover(firstTouch.getX(), firstTouch.getY()));
                 add(createCover(secondTouch.getX(), secondTouch.getY()));
             }
