@@ -10,8 +10,8 @@ int drawable dog7 0x7f020006
 int drawable dog8 0x7f020007
 int drawable ic_launcher 0x7f020008
 int id action_settings 0x7f080003
-int id infoLabel 0x7f080000
-int id reset 0x7f080001
+int id infoLabel 0x7f080001
+int id reset 0x7f080000
 int id shapeView 0x7f080002
 int layout card 0x7f030000
 int menu card_game 0x7f070000
